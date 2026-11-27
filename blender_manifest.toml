@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+
+id = "easy_conifer"
+version = "0.8.0"
+name = "Easy Conifer"
+tagline = "Procedural trees and shrubs on Geometry Nodes"
+maintainer = "Pavel Fomin <ghostpwl@gmail.com>"
+type = "add-on"
+website = "https://github.com/GhostPWLk1n/EasyTree"
+
+tags = ["Geometry Nodes", "Add Mesh"]
+
+blender_version_min = "5.0.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+copyright = [
+  "2026 Pavel Fomin",
+]
