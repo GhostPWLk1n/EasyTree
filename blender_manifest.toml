@@ -1,7 +1,7 @@
 schema_version = "1.0.0"
 
 id = "easy_conifer"
-version = "0.8.0"
+version = "0.9.0"
 name = "Easy Conifer"
 tagline = "Procedural trees and shrubs on Geometry Nodes"
 maintainer = "Pavel Fomin <ghostpwl@gmail.com>"
@@ -17,4 +17,19 @@ license = [
 ]
 copyright = [
   "2026 Pavel Fomin",
+]
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "/.github/",
+  "/.gitignore",
+  "/tests/",
+  "/reports/",
+  "/dist/",
+  "/CLAUDE.md",
+  "/AGENTS.md",
+  "*.zip",
+  "*.exr",
 ]

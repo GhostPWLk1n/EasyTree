@@ -10,7 +10,21 @@ Easy Tree установлен, по умолчанию берётся его м
 ## Установка
 
 `Edit → Preferences → Get Extensions → ▾ → Install from Disk…` → выбрать
-`easy_conifer-0.8.0.zip`. Проверено на Blender 5.2.
+`easy_conifer-0.9.0.zip`. Проверено на Blender 5.2.
+
+## Управление через MCP и скрипты
+
+С версии 0.9.0 аддон публикует API для Python-скриптов и ИИ-агентов, работающих через Blender MCP:
+
+```python
+import bpy, json
+ec = bpy.app.driver_namespace["easy_conifer_api"]
+ec.add_row("TILIA_CORDATA", (0, 0), (60, 0), spacing=8)                       # аллея лип
+ec.add_hedge("HEDGE_COTONEASTER", (0, -4), (60, -4), height=0.9, depth=0.7)   # изгородь одним объектом
+print(json.dumps(ec.scene_info(with_tris=True), ensure_ascii=False))
+```
+
+Справочник функций и порядок работы для агента — [MCP.md](MCP.md).
 
 ## Как пользоваться
 
@@ -230,3 +244,19 @@ Cycles на CPU). Новые атласы сохраняются в папку �
 `mod["Socket_N"]`, теперь это `mod.properties.inputs.Socket_N.value`.
 Поэтому кнопка Add Tree в самом Easy Tree 1.0.0 на 5.2 падает с ошибкой.
 Easy Conifer поддерживает оба варианта (`modifier_io.py`).
+
+## Первоисточник
+
+Easy Conifer сделан как компаньон к **Easy Tree** — генератору деревьев на Geometry Nodes
+(автор Jacob Johnston, GPL-3.0-or-later): <https://github.com/jacobcjohnston/Easy-Tree>.
+От Easy Tree взяты идея и место в интерфейсе: вкладка **Easy Tree** боковой панели. Если Easy Tree
+установлен, используется его материал коры. Код Easy Tree в этот репозиторий не входит. Поэтому
+Easy Conifer распространяется под той же лицензией GPL-3.0-or-later (см. `LICENSE`).
+
+## Разработка
+
+- Правила для разработчика (Claude) — [CLAUDE.md](CLAUDE.md), для тестировщика (Codex) — [AGENTS.md](AGENTS.md).
+- Тесты запускаются без установки, прямо из клона (`pip install bpy==5.2.*` или `blender -b --factory-startup --python …`):
+  `tests/test_api.py` — функции API, `tests/smoke_test.py` — все пресеты и бюджеты полигонов,
+  `tests/render_preview.py` — рендеры для визуальной проверки.
+- Отчёты тестирования — `reports/`, история изменений — [Changelog.md](Changelog.md).

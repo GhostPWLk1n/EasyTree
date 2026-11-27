@@ -43,9 +43,14 @@ def register():
         name="Needle Density", default=1.0, min=0.3, max=3.0, description="Needle density multiplier")
     for cls in operators.classes + panel.classes:
         bpy.utils.register_class(cls)
+    # for scripts and MCP agents: ec = bpy.app.driver_namespace["easy_conifer_api"]
+    # (extensions may not register top-level modules of their own)
+    from . import api
+    bpy.app.driver_namespace["easy_conifer_api"] = api
 
 
 def unregister():
+    bpy.app.driver_namespace.pop("easy_conifer_api", None)
     for cls in reversed(operators.classes + panel.classes):
         bpy.utils.unregister_class(cls)
     del bpy.types.Scene.easy_conifer_use_easy_tree_bark
